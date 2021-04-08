@@ -66,7 +66,7 @@ class MovieRecommender():
         """
         spark = MovieRecommender.spark
         sparked_input = spark.createDataFrame(requests)
-        sparked_predicted = recommender.transform(sparked_input)
+        sparked_predicted = self.trained_model.transform(sparked_input)
 
         #requests['rating'] = np.random.choice(range(1, 5), requests.shape[0])
         self.logger.debug("finishing predict")
