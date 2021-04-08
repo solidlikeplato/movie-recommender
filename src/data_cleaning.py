@@ -2,7 +2,7 @@
 import pandas as pd
 
 
-ratings_df = pd.read_csv('data/training.csv')
+ratings_df = pd.read_csv('../data/training.csv')
 
 movies_df = pd.read_csv("data/movies.dat", sep='::', names=["num", "title", "genres"])
 movies_df['year'] = movies_df['title'].str[-5:-1]
