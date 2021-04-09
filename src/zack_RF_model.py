@@ -42,8 +42,6 @@ X.drop(['user', 'movie', 'timestamp', 'request_id', 'id_x', 'request_movie_id', 
          'genres_y', 'homepage', 'id_y', 'imdb_id', 'original_language', 'original_title', 'overview', 'poster_path',
          'production_companies', 'production_countries', 'release_date', 'spoken_languages', 'status', 'tagline', 'video'], axis=1, inplace=True)
 X.fillna(X.median(), inplace=True)
-
-X = X[0:100000]
 y = X.pop('rating')
 print(X.head())
 
@@ -53,13 +51,16 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.5, random_
 RF_model = RandomForestRegressor(max_depth=10, max_features=0.4, n_estimators=800,
                                 min_samples_split=5, min_samples_leaf=4, n_jobs=8)
 
-RF_model.fit(X_train, y_train)
+RF_model.fit(X, y)
 
-y_pred = RF_model.predict(X_test)
-rmse = (mean_squared_error(y_test, y_pred)**0.5)
-print(rmse)
-print(RF_model.feature_importances_)
 
+# y_pred = RF_model.predict(X_test)
+# rmse = (mean_squared_error(y_test, y_pred)**0.5)
+# print(rmse)
+# print(RF_model.feature_importances_)
+
+from joblib import dump, load
+dump(RF_model, '../data/RF_model.joblib')
 
 # grid = {
 #         'n_estimators': [800],
